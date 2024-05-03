@@ -1,0 +1,28 @@
+{
+  "name": "expense_tracker",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"bun run dev:client\" \"bun run dev:server\"",
+    "dev:client": "bun --filter \"frontend\" dev",
+    "dev:server": "bun --filter \"backend\" dev",
+    "start": "concurrently \"bun run start:client\" \"bun run start:server\"",
+    "start:client": "bun --filter \"frontend\" start",
+    "start:server": "bun --filter \"backend\" start"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}
