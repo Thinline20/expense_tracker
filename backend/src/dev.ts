@@ -1,14 +1,19 @@
+import Elysia from "elysia";
 import { logger } from "@bogeychan/elysia-logger";
 import swagger from "@elysiajs/swagger";
-import Elysia from "elysia";
+import { autoroutes } from "elysia-autoroutes";
 
 import { env } from "./lib/env";
-import { createServer } from "./router";
+import { createFileBasedRoutingServer } from "./router";
+import { generateType } from "./generate-eden-type";
 
 async function mainDev() {
+  console.clear();
   const start = performance.now();
 
-  const elysia = (await createServer(new Elysia()))
+  const elysia = (
+    await createFileBasedRoutingServer(new Elysia({ prefix: "/api" }))
+  )
     .use(
       logger({
         transport: {
@@ -32,6 +37,8 @@ async function mainDev() {
 
   console.log(`Server running at http://localhost:${env.PORT}`);
   console.log(`Server started in ${end - start}ms`);
+
+  generateType();
 
   // const watcher = watch(
   //   import.meta.dir + "/server/routes",
@@ -77,6 +84,42 @@ async function mainDev() {
 
   //   process.exit(0);
   // });
+}
+
+function mainAutoRoutes() {
+  console.clear();
+
+  const now = performance.now();
+
+  const elysia = new Elysia({ prefix: "/api" })
+    .use(
+      logger({
+        transport: {
+          target: "pino-pretty",
+          options: {
+            colorize: true,
+          },
+        },
+      }),
+    )
+    .use(swagger())
+    .use(
+      autoroutes({
+        routesDir: "./routes",
+      }),
+    )
+    .compile();
+
+  const server = Bun.serve({
+    hostname: "0.0.0.0",
+    port: env.PORT,
+    fetch: elysia.fetch,
+  });
+
+  const end = performance.now();
+
+  console.log(`Server running at http://localhost:${env.PORT}`);
+  console.log(`Server started in ${end - now}ms`);
 }
 
 mainDev();

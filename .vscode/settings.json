@@ -7,4 +7,7 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[astro]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

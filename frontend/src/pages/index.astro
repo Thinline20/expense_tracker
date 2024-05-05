@@ -1,0 +1,17 @@
+---
+import { Total } from "~/components/expense/total";
+import Layout from "~/layouts/Layout.astro";
+import { client } from "~/lib/eden";
+
+const total = await (
+  await fetch(Astro.url + "/api/expenses/total-spent")
+).json();
+
+const { data: x } = await client.api.expenses({ id: 1 }).get();
+---
+
+<Layout>
+  <main class="container">
+    <Total total={total.total} client:load />
+  </main>
+</Layout>

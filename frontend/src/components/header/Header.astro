@@ -1,0 +1,12 @@
+---
+import { ThemeToggle } from "./theme-toggle";
+---
+
+<header class="container flex justify-between py-4">
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+  <div>
+    <ThemeToggle client:only="solid-js" />
+  </div>
+</header>

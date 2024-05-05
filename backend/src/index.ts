@@ -1,10 +1,12 @@
 import Elysia from "elysia";
 
 import { env } from "./lib/env";
-import { createServer } from "./router";
+import { createFileBasedRoutingServer } from "./router";
 
 async function main() {
-  const elysia = (await createServer(new Elysia())).compile();
+  const elysia = await createFileBasedRoutingServer(
+    new Elysia({ prefix: "/api" }),
+  );
 
   Bun.serve({
     hostname: env.HOSTNAME,

@@ -1,0 +1,15 @@
+---
+import Header from "~/components/header/Header.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+type Props = {
+  title?: string;
+}
+
+const { title = "Expense" } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <Header />
+  <slot />
+</BaseLayout>
