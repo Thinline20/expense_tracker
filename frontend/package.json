@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "@repo/frontend",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -15,14 +15,23 @@
     "@astrojs/tailwind": "^5.1.0",
     "@elysiajs/eden": "^1.0.12",
     "@kobalte/core": "^0.13.1",
+    "@kobalte/tailwindcss": "^0.9.0",
     "@nanostores/solid": "^0.4.2",
+    "@repo/backend": "workspace:*",
+    "@repo/error": "workspace:*",
+    "@tanstack/solid-form": "^0.19.4",
     "astro": "^4.7.1",
+    "class-variance-authority": "^0.7.0",
     "corvu": "^0.5.1",
+    "effect": "^3.1.2",
     "nanostores": "^0.10.3",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.8.17",
     "solid-sonner": "^0.2.6",
+    "solid-spinner": "^0.2.0",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.4.5"
   },
   "devDependencies": {

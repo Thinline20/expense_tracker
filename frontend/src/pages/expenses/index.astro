@@ -1,0 +1,14 @@
+---
+if (Astro.locals.user === null) {
+  return Astro.redirect("/");
+}
+
+import { GetAllExpenses } from "~/components/expense/get-all";
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout title="Expenses">
+  <main class="container">
+    <GetAllExpenses client:only="solid-js" />
+  </main>
+</Layout>

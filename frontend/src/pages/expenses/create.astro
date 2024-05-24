@@ -1,0 +1,14 @@
+---
+if (Astro.locals.user === null) {
+  return Astro.redirect("/");
+}
+
+import Layout from "~/layouts/Layout.astro";
+import { CreateExpense } from "~/components/expense/create";
+---
+
+<Layout title="Expense">
+  <main class="container">
+    <CreateExpense client:only="solid-js" />
+  </main>
+</Layout>

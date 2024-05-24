@@ -1,9 +1,15 @@
-import { createRoute } from "~/router";
+import Elysia from "elysia";
 
-export function GET() {
+import { route as expensesRoute } from "./expenses";
+import { route as authRoute } from "./auth";
+
+function GET() {
   return {
     message: "Hello World!",
   };
 }
 
-createRoute("get", "/", GET);
+export const route = new Elysia()
+  .get("/", GET)
+  .use(expensesRoute)
+  .use(authRoute);

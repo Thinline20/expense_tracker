@@ -1,14 +1,5 @@
 {
   "name": "expense_tracker",
-  "type": "module",
-  "scripts": {
-    "dev": "concurrently \"bun run dev:client\" \"bun run dev:server\"",
-    "dev:client": "bun --filter \"frontend\" dev",
-    "dev:server": "bun --filter \"backend\" dev",
-    "start": "concurrently \"bun run start:client\" \"bun run start:server\"",
-    "start:client": "bun --filter \"frontend\" start",
-    "start:server": "bun --filter \"backend\" start"
-  },
   "devDependencies": {
     "@types/bun": "latest",
     "concurrently": "^8.2.2",
@@ -19,20 +10,27 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"bun run dev:client\" \"bun run dev:server\"",
+    "dev:client": "bun --filter \"@repo/frontend\" dev",
+    "dev:server": "bun --filter \"@repo/backend\" dev",
+    "start": "concurrently \"bun run start:client\" \"bun run start:server\"",
+    "start:client": "bun --filter \"@repo/frontend\" start",
+    "start:server": "bun --filter \"@repo/backend\" start"
+  },
+  "type": "module",
   "workspaces": [
     "frontend",
     "backend",
     "packages/*"
   ],
-  "engines": {
-    "bun": ">=1.1.0"
-  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "dependencies": {
-    "@kobalte/core": "^0.13.1",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss": "^3.4.3",
-    "tailwindcss-animate": "^1.0.7"
+    "@astrojs/check": "0.7.0",
+    "@astrojs/solid-js": "4.2.0",
+    "astro": "4.9.1"
   }
 }

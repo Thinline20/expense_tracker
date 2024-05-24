@@ -1,12 +1,54 @@
 ---
+import { LogoutForm } from "../auth/logout-form";
+import { Link } from "../ui/link";
 import { ThemeToggle } from "./theme-toggle";
+
+const links = [
+  { href: "/", text: "Home" },
+  { href: "/expenses", text: "Expenses" },
+  { href: "/expenses/create", text: "Create" },
+];
+
+const loggedIn = Astro.locals.user !== null;
 ---
 
 <header class="container flex justify-between py-4">
-  <nav>
-    <a href="/">Home</a>
+  <nav class="flex items-center gap-4 text-sm lg:gap-6">
+    {
+      links.map(({ href, text }) => (
+        <a
+          class="text-foreground/60 hover:text-foreground/80 transition-colors"
+          href={href}
+        >
+          {text}
+        </a>
+      ))
+    }
   </nav>
-  <div>
+  <div class="flex h-9 items-center justify-center gap-4">
+    <nav class="flex gap-4">
+      {
+        !loggedIn && (
+          <>
+            <Link
+              href="/auth/login"
+              variant="linkHover2"
+              class="px-0 after:w-full"
+            >
+              Login
+            </Link>
+            <Link
+              href="/auth/signup"
+              variant="linkHover2"
+              class="px-0 after:w-full"
+            >
+              Signup
+            </Link>
+          </>
+        )
+      }
+      {loggedIn && <LogoutForm client:only="solid-js" />}
+    </nav>
     <ThemeToggle client:only="solid-js" />
   </div>
 </header>

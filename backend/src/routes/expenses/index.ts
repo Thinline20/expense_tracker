@@ -1,11 +1,12 @@
 import { Effect, Exit } from "effect";
-import { t, type Context } from "elysia";
+import Elysia, { t, type Context } from "elysia";
 import * as S from "@effect/schema/Schema";
 import { ParseError } from "@effect/schema/ParseResult";
 
-import type { RouteHook } from "backend/src/types/elysia";
-import { ExpenseSchema, type Expense } from "backend/src/types/expense";
-import { createRoute } from "~/router";
+import { ExpenseSchema, type Expense } from "~/types/expense";
+
+import { route as dynamicIdRoute } from "./:id";
+import { route as totalSpentRoute } from "./total-spent";
 
 export const fakeExpenses = [
   { id: 0, title: "Rent", amount: 1000 },
@@ -13,10 +14,11 @@ export const fakeExpenses = [
   { id: 2, title: "Groceries", amount: 200 },
 ] as Expense[];
 
-export function GET() {
-  return {
-    expenses: fakeExpenses,
-  };
+export async function GET() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return new Response(JSON.stringify({ expenses: fakeExpenses }), {
+    status: 200,
+  });
 }
 
 export const createPostSchema = ExpenseSchema.pipe(S.omit("id"));
@@ -40,17 +42,18 @@ export function POST({ body }: Context) {
   });
 }
 
-export const postHook: RouteHook = {
-  body: t.Object(
-    {
-      title: t.String(),
-      amount: t.Integer(),
-    },
-    {
-      error: "Incorrect data type",
-    },
-  ),
-};
-
-createRoute("get", "/expenses", GET);
-createRoute("post", "/expenses", POST, postHook);
+export const route = new Elysia({ prefix: "/expenses" })
+  .get("/", GET)
+  .post("/", POST, {
+    body: t.Object(
+      {
+        title: t.String(),
+        amount: t.Integer(),
+      },
+      {
+        error: "Incorrect data type",
+      },
+    ),
+  })
+  .use(dynamicIdRoute)
+  .use(totalSpentRoute);

@@ -1,4 +1,4 @@
-import { ComponentProps, splitProps, type Component } from "solid-js";
+import { type ComponentProps, splitProps, type Component } from "solid-js";
 
 import { NumberField as NumberFieldPrimitive } from "@kobalte/core/number-field";
 
@@ -28,7 +28,7 @@ const NumberFieldInput: Component<
   return (
     <NumberFieldPrimitive.Input
       class={cn(
-        "flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[invalid]:border-error-foreground data-[invalid]:text-error-foreground",
+        "border-input ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring data-[invalid]:border-error-foreground data-[invalid]:text-error-foreground flex h-10 w-full rounded-md border bg-transparent px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         props.class,
       )}
       {...rest}
@@ -102,7 +102,7 @@ const NumberFieldDescription: Component<
   const [, rest] = splitProps(props, ["class"]);
   return (
     <NumberFieldPrimitive.Description
-      class={cn("text-sm text-muted-foreground", props.class)}
+      class={cn("text-muted-foreground text-sm", props.class)}
       {...rest}
     />
   );
@@ -114,7 +114,7 @@ const NumberFieldErrorMessage: Component<
   const [, rest] = splitProps(props, ["class"]);
   return (
     <NumberFieldPrimitive.ErrorMessage
-      class={cn("text-sm text-error-foreground", props.class)}
+      class={cn("text-error-foreground text-sm", props.class)}
       {...rest}
     />
   );

@@ -1,0 +1,15 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import { SignupForm } from "~/components/auth/signup-form";
+
+if (Astro.locals.user !== null) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title="Signup">
+  <div class="mx-auto mt-8 w-full max-w-xl rounded-lg border p-6">
+    <h2 class="mb-4 text-2xl font-bold">Signup</h2>
+    <SignupForm client:only="solid-js" />
+  </div>
+</Layout>

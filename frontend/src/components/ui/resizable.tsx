@@ -1,33 +1,42 @@
-import { Component, Show, splitProps } from "solid-js"
+import { type Component, Show, splitProps } from "solid-js";
 
-import { HandleProps, Resizable as ResizablePrimitive, RootProps } from "corvu/resizable"
+import {
+  type HandleProps,
+  Resizable as ResizablePrimitive,
+  type RootProps,
+} from "corvu/resizable";
 
-import { cn } from "~/lib/utils"
+import { cn } from "~/lib/utils";
 
 const Resizable: Component<RootProps> = (props) => {
-  const [, rest] = splitProps(props, ["class"])
+  const [, rest] = splitProps(props, ["class"]);
   return (
     <ResizablePrimitive
-      class={cn("flex size-full data-[orientation=vertical]:flex-col", props.class)}
+      class={cn(
+        "flex size-full data-[orientation=vertical]:flex-col",
+        props.class,
+      )}
       {...rest}
     />
-  )
-}
+  );
+};
 
-const ResizablePanel = ResizablePrimitive.Panel
+const ResizablePanel = ResizablePrimitive.Panel;
 
-const ResizableHandle: Component<HandleProps & { withHandle?: boolean }> = (props) => {
-  const [, rest] = splitProps(props, ["class", "withHandle"])
+const ResizableHandle: Component<HandleProps & { withHandle?: boolean }> = (
+  props,
+) => {
+  const [, rest] = splitProps(props, ["class", "withHandle"]);
   return (
     <ResizablePrimitive.Handle
       class={cn(
-        "relative flex w-px shrink-0 items-center justify-center bg-border after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full data-[orientation=vertical]:after:left-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full data-[orientation=vertical]:after:-translate-y-1/2 data-[orientation=vertical]:after:translate-x-0 [&[data-orientation=vertical]>div]:rotate-90",
-        props.class
+        "bg-border focus-visible:ring-ring relative flex w-px shrink-0 items-center justify-center after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-1 data-[orientation=vertical]:h-px data-[orientation=vertical]:w-full data-[orientation=vertical]:after:left-0 data-[orientation=vertical]:after:h-1 data-[orientation=vertical]:after:w-full data-[orientation=vertical]:after:-translate-y-1/2 data-[orientation=vertical]:after:translate-x-0 [&[data-orientation=vertical]>div]:rotate-90",
+        props.class,
       )}
       {...rest}
     >
       <Show when={props.withHandle}>
-        <div class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border">
+        <div class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-sm border">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -48,7 +57,7 @@ const ResizableHandle: Component<HandleProps & { withHandle?: boolean }> = (prop
         </div>
       </Show>
     </ResizablePrimitive.Handle>
-  )
-}
+  );
+};
 
-export { Resizable, ResizablePanel, ResizableHandle }
+export { Resizable, ResizablePanel, ResizableHandle };

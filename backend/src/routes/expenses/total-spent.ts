@@ -1,13 +1,13 @@
-import type { Context } from "elysia";
+import { Elysia, type Context } from "elysia";
 import { sum } from "@repo/math-sum";
 
 import { fakeExpenses } from ".";
-import { createRoute } from "~/router";
 
-export function GET(context: Context) {
+export async function GET(context: Context) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const total = sum(fakeExpenses.map((e) => e.amount));
 
-  return { total: total };
+  return new Response(JSON.stringify({ total: total }), { status: 200 });
 }
 
-createRoute("get", "/expenses/total-spent", GET);
+export const route = new Elysia().get("/total-spent", GET);
