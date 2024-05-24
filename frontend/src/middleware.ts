@@ -1,5 +1,5 @@
 import type { APIContext, MiddlewareNext } from "astro";
-import { defineMiddleware, sequence } from "astro:middleware";
+import { sequence } from "astro:middleware";
 
 async function validation(context: APIContext, next: MiddlewareNext) {
   if (context.request.method !== "GET") {
