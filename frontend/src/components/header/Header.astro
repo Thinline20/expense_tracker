@@ -1,6 +1,6 @@
 ---
-import { LogoutForm } from "../auth/logout-form";
-import { Link } from "../ui/link";
+import { LogoutForm } from "~/components/auth/logout-form";
+import { Link } from "~/components/ui/link";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
@@ -17,7 +17,7 @@ const loggedIn = Astro.locals.user !== null;
     {
       links.map(({ href, text }) => (
         <a
-          class="text-foreground/60 hover:text-foreground/80 transition-colors"
+          class="text-foreground/70 hover:text-foreground transition-colors"
           href={href}
         >
           {text}

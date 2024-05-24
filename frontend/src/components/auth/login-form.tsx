@@ -5,8 +5,8 @@ import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { FieldInfo } from "~/components/field-info";
 import { Button } from "~/components/ui/button";
+import { PasswordInput } from "~/components/ui/password-input";
 import { api } from "~/lib/eden";
-import { PasswordInput } from "../ui/password-input";
 
 export function LoginForm() {
   const form = createForm(() => ({
