@@ -10,7 +10,7 @@ import { BaseError } from "@repo/error/base-error";
 
 export const route = new Elysia().post(
   "/signup",
-  async ({ body: { username, password }, set, error }) => {
+  async ({ body: { username, password, email }, set, error }) => {
     const program = Effect.gen(function* (_) {
       if (
         !username ||
@@ -26,6 +26,15 @@ export const route = new Elysia().post(
         password.length < 8 ||
         password.length > 255 ||
         !/^[a-zA-Z0-9_\-!@#$%^&*(^)]+$/.test(password.toString())
+      ) {
+        yield* _(Effect.fail(new InvalidFormData()));
+      }
+
+      if (
+        !email ||
+        email.length < 3 ||
+        email.length > 255 ||
+        !/^[^@]+@[^@]+\.[^@]+$/.test(email.toString())
       ) {
         yield* _(Effect.fail(new InvalidFormData()));
       }
@@ -66,6 +75,7 @@ export const route = new Elysia().post(
               id: userId,
               username: username!.toString(),
               password: passwordHash,
+              email: email!.toString(),
             }),
           catch: () => new NetworkError(),
         }),
@@ -105,6 +115,7 @@ export const route = new Elysia().post(
     body: t.Object({
       username: t.String(),
       password: t.String(),
+      email: t.String(),
     }),
   },
 );

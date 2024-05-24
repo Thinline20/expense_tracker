@@ -23,15 +23,21 @@ async function validation(context: APIContext, next: MiddlewareNext) {
 async function auth(context: APIContext, next: MiddlewareNext) {
   const cookie = context.request.headers.get("Cookie");
 
-  const auth = await fetch("http://localhost:3000/api/auth/me", {
+  if (!cookie) {
+    context.locals.session = null;
+    context.locals.user = null;
+    return next();
+  }
+
+  const res = await fetch("http://localhost:3000/api/auth/me", {
     headers: {
       "Content-Type": "application/json",
       Cookie: cookie || "",
     },
   });
-  const data = await auth.json();
 
-  if (data.isAuthenticated) {
+  if (res.ok) {
+    const data = await res.json();
     context.locals.session = data.session;
     context.locals.user = data.user;
   } else {

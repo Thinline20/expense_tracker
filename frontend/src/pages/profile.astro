@@ -1,0 +1,13 @@
+---
+if (!Astro.locals.user) {
+  return Astro.redirect("/");
+}
+
+import Layout from "~/layouts/Layout.astro";
+
+import { UserProfile } from "~/components/user/profile";
+---
+
+<Layout>
+  <UserProfile client:only="solid-js" userId={Astro.locals.user.id} />
+</Layout>

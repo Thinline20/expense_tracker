@@ -7,6 +7,7 @@ const links = [
   { href: "/", text: "Home" },
   { href: "/expenses", text: "Expenses" },
   { href: "/expenses/create", text: "Create" },
+  { href: "/profile", text: "Profile" },
 ];
 
 const loggedIn = Astro.locals.user !== null;
@@ -30,18 +31,10 @@ const loggedIn = Astro.locals.user !== null;
       {
         !loggedIn && (
           <>
-            <Link
-              href="/auth/login"
-              variant="linkHover2"
-              class="px-0 after:w-full"
-            >
+            <Link href="/login" variant="linkHover2" class="px-0 after:w-full">
               Login
             </Link>
-            <Link
-              href="/auth/signup"
-              variant="linkHover2"
-              class="px-0 after:w-full"
-            >
+            <Link href="/signup" class="">
               Signup
             </Link>
           </>

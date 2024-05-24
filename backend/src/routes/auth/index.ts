@@ -4,10 +4,12 @@ import { route as signupRoute } from "./login";
 import { route as logoutRoute } from "./logout";
 import { route as callbackRoute } from "./callback";
 import { route as meRoute } from "./me";
+import { route as profileRoute } from "./profile";
 
 export const route = new Elysia({ prefix: "/auth" })
   .use(loginRoute)
   .use(signupRoute)
   .use(logoutRoute)
   .use(callbackRoute)
-  .use(meRoute);
+  .use(meRoute)
+  .use(profileRoute);

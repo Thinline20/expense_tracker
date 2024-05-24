@@ -6,11 +6,12 @@ export const users = sqliteTable("users", {
   username: text("username").notNull(),
   password: text("password").notNull(),
   googleId: text("google_id"),
+  email: text("email").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" })
-    .default(sql`(CURRENT_TIMESTAMP)`)
+    .default(new Date())
     .notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" })
-    .default(sql`(CURRENT_TIMESTAMP)`)
+    .default(new Date())
     .notNull(),
 });
 

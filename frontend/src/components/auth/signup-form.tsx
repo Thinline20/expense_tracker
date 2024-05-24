@@ -17,6 +17,7 @@ export function SignupForm() {
     defaultValues: {
       username: "",
       password: "",
+      email: "",
     },
     onSubmit: async ({ value }) => {
       try {
@@ -76,6 +77,24 @@ export function SignupForm() {
               onChange={(e) => field().handleChange(e.currentTarget.value)}
               onBlur={field().handleBlur}
               autocomplete="current-password"
+              required
+            />
+            <FieldInfo field={field()} />
+          </>
+        )}
+      </form.Field>
+      <form.Field name="email">
+        {(field) => (
+          <>
+            <Label for={field().name}>Email</Label>
+            <Input
+              type="email"
+              name={field().name}
+              id={field().name}
+              value={field().state.value}
+              onChange={(e) => field().handleChange(e.currentTarget.value)}
+              onBlur={field().handleBlur}
+              autocomplete="email"
               required
             />
             <FieldInfo field={field()} />
